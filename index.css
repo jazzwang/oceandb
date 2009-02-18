@@ -1,19 +1,21 @@
 body, html  { overflow: hidden; height: 100%; vertical-align: middle; margin: 0px; font-family: Geneva,Arial,Helvetica,sans-serif; font-size: 12pt; }
+a	    { text-decoration: none !important; }
 
 /* header */
-#header	      { position: absolute; overflow: hidden; color: #bbb; border-bottom: 1px solid; height: 24px; width: 100%; background-color: blue; padding: 5px; }
-#header a     { color: white; }
-#main-menu    { float: left;  margin-left:  15px; }
-#title	      { float: right; margin-right: 15px; font-size: 18px; }
+#header	      { overflow: hidden; color: #FFE080; border-bottom: 1px solid; height: 24px; width: 100%; background-color: #03004D; padding: 5px; }
+#header a     { color: #FFC200; }
+#main-menu    { float: left;  margin-left:  5px; height: 100%; vertical-align: middle; }
+#title	      { float: right; margin-right: 5px; font-size: 18px; }
 
 /* main */
-#main	      { color: #bbb; height: 100%; width: 100%; background-color: gray; padding: 0px; }
-#map-menu     { background-color: blue;  width: 20%; height: 100%; float: left; display: block; }
-#map	      { background-color: black; width: 80%; height: 100%; float: right; }
+#main	      { overflow: hidden; color: #03004D; height: 80%; width: 100%; background-color: gray; padding: 0px; }
+#map-menu     { background-color: #E6E6FF; width: 20%; height: 100%; float: left; display: block; font-size: 12px;}
+#map-menu h3  { color: #03004D; font-size: 12px; }
+#map	      { background-color: #03004D; width: 80%; height: 100%; float: right; }
 
 /* footer */
-#footer	      { position: absolute; overflow: hidden; color: #bbb; border-top: 1px solid; bottom: 0px; height: 31px; width: 100%; background-color: blue; padding: 5px; }
-#footer	a     { color: white; }
-#copyright    { float: left;  margin-left:   15px; }
-#logos	      { float: right; margin-right:  15px; }
-#logos img    { border: none; height: 31px; }
+#footer	      { overflow: hidden; color: #FFE080; border-top: 1px solid; bottom: 0px; height: 24px; width: 100%; background-color: #03004D; padding: 5px; }
+#footer	a     { color: #FFC200; }
+#copyright    { float: left;  margin-left:  5px; height: 100%; vertical-align: middle; }
+#logos	      { float: right; margin-right: 5px; }
+#logos img    { border: none; height: 23px; }

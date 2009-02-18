@@ -10,4 +10,6 @@ $(document).ready(function() {
       $('#map').css({ width: '80%'});
     }
   });
+
+  $('#map-menu').accordion({ header: "h3" });
 });

@@ -4,21 +4,72 @@
   <head>
     <title>台灣海洋資訊資料庫聯盟網 Taiwan Ocean Informatioan Database</title>
     <link rel="stylesheet" type="text/css" href="index.css" />
+    <link rel="stylesheet" type="text/css" href="css/theme/ui.all.css" />
     <script src="script/jquery.js"  language="javascript"></script>
+    <script src="script/jquery-ui.js"  language="javascript"></script>
     <script src="script/oceandb.js" language="javascript"></script>
   </head>
   <body>
     <div id="header">
-      <div id="main-menu">
-	<a href="/">HOME</a>
-	<a href="#" id="btnMenu">MENU</a>
-	<a href="#">NEWS</a>
-	<a href="#">ABOUT</a>
+      <div id="main-menu"> 
+	<a href="/">HOME</a> |
+	<a href="#" id="btnMenu">MENU</a> |
+	<a href="#">NEWS</a> |
+	<a href="#">ABOUT</a>  
       </div>
       <div id="title"><a href="/">台灣海洋資訊資料庫聯盟網 Taiwan Ocean Informatioan Database</a></div>
     </div>
     <div id="main">
-      <div id="map-menu"></div>
+      <div id="map-menu">
+	<div><h3><a href='#'>波浪 (定點)</a></h3><div><p><ul>
+	  <li><input type='checkbox'>中央氣象局</input></li>
+	  <li><input type='checkbox'>中央氣象局委託</input></li>
+	  <li><input type='checkbox'>交通部觀光局</input></li>
+	  <li><input type='checkbox'>港灣技術研究中心</input></li>
+	  <li><input type='checkbox'>經濟部水利署</input></li>
+	  </ul>
+	</p><br/></div></div>
+	<div><h3><a href='#'>潮汐 (定點)</a></h3><div><p><ul>
+	  <li><input type='checkbox'>中央氣象局</input></li>
+	  <li><input type='checkbox'>中央氣象局委託</input></li>
+	  <li><input type='checkbox'>內政部</input></li>
+	  <li><input type='checkbox'>基隆港務局</input></li>
+	  <li><input type='checkbox'>基隆港務局蘇澳</input></li>
+	  <li><input type='checkbox'>港灣技術研究中心</input></li>
+	  <li><input type='checkbox'>經濟部水利署</input></li>
+	  <li><input type='checkbox'>高雄港務局</input></li>
+	  <li><input type='checkbox'>高雄港務局安平</input></li>
+	</ul></p><br/></div></div>
+	<div><h3><a href='#'>氣象 (定點)</a></h3><div><p><ul>
+          <li><input type='checkbox'>中央氣象局</input></li>
+          <li><input type='checkbox'>交通部觀光局</input></li>
+          <li><input type='checkbox'>港灣技術研究中心</input></li>
+          <li><input type='checkbox'>經濟部水利署</input></li>
+	</ul></p><br/></div></div>
+	<div><h3><a href='#'>海流 (定點)</a></h3><div><p><ul>
+          <li><input type='checkbox'>港灣技術研究中心</input></li>
+	</ul></p><br/></div></div>
+	<div><h3><a href='#'>溫鹽 (船測)</a></h3><div><p><ul>
+          <li><input type='checkbox'>國科會</input></li>
+	</ul></p><br/></div></div>
+	<div><h3><a href='#'>震測 (船測)</a></h3><div><p><ul>
+          <li><input type='checkbox'>中央大學地球物理研究所</input></li>
+          <li><input type='checkbox'>修平技術學院工業工程與管理系</input></li>
+          <li><input type='checkbox'>台灣大學海洋研究所</input></li>
+          <li><input type='checkbox'>海洋大學</input></li>
+          <li><input type='checkbox'>海洋大學應用地球物理研究所</input></li>
+	</ul></p><br/></div></div>
+	<div><h3><a href='#'>海流 (船測)</a></h3><div><p><ul>
+          <li><input type='checkbox'>NCOR</input></li>
+	</ul></p><br/></div></div>
+	<div><h3><a href='#'>水深 (船測)</a></h3><div><p><ul>
+          <li><input type='checkbox'>NCOR</input></li>
+	</ul></p><br/></div></div>
+	<div><h3><a href='#'>Chirp Sonar (船測)</a></h3><div><p><ul>
+          <li><input type='checkbox'>中央大學地球物理研究所</input></li>
+          <li><input type='checkbox'>中央研究院地球科學研究所</input></li>
+	</ul></p><br/></div></div>
+      </div>
       <div id="map"></div>
     </div>
     <div id="footer">
