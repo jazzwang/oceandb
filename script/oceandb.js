@@ -1,4 +1,17 @@
+// 註冊 onReady Event
+// 參考: http://docs.jquery.com/Events
 $(document).ready(function() {
+
+  // 顯示 Loading 字樣
+
+  // 設定地圖高度
+  var map_height=document.documentElement.clientHeight - 68;
+  $('#main').css( { height: map_height } );
+
+  // 設定左側選單的 Accordion 風格
+  $('#map-menu').accordion({ header: "h3" });
+
+  // 設定點選 "MENU" 的行為
   $('#btnMenu').click(function()
   {
     if($('#map-menu').css("display") != "none")
@@ -10,8 +23,14 @@ $(document).ready(function() {
       $('#map').css({ width: '80%'});
     }
   });
+});
 
-  $('#map-menu').accordion({ header: "h3" });
+// 註冊 window 物件的 onResize Event
+// 參考: http://docs.jquery.com/Events
+$(window).resize(function() {
+  // 當改變瀏覽器大小時，重新設定地圖高度
+  var map_height=document.documentElement.clientHeight - 68;
+  $('#main').css( { height: map_height } );
 });
 
 function load() {
