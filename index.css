@@ -1,16 +1,19 @@
 body, html  { overflow: hidden; height: 100%; vertical-align: middle; margin: 0px; font-family: Geneva,Arial,Helvetica,sans-serif; font-size: 12pt; }
 
 /* header */
-#header	      { position: absolute; color: #bbb; border-bottom: 1px solid; width: 100%; margin-bottom: 2px; background-color: black; padding: 5px; }
+#header	      { position: absolute; overflow: hidden; color: #bbb; border-bottom: 1px solid; height: 24px; width: 100%; background-color: blue; padding: 5px; }
 #header a     { color: white; }
 #main-menu    { float: left;  margin-left:  15px; }
 #title	      { float: right; margin-right: 15px; font-size: 18px; }
 
 /* main */
+#main	      { color: #bbb; height: 100%; width: 100%; background-color: gray; padding: 0px; }
+#map-menu     { background-color: blue;  width: 20%; height: 100%; float: left; display: block; }
+#map	      { background-color: black; width: 80%; height: 100%; float: right; }
 
 /* footer */
-#footer	    { position: absolute; color: #bbb; border-top: 1px solid; bottom: 5px; width: 100%; background-color: black; padding: 5px; }
-#footer	a   { color: white; }
-#copyright  { float: left;  margin-left:   15px; }
-#logos	    { float: right; margin-right:  15px; }
-#logos img  { border: none; height: 31px; }
+#footer	      { position: absolute; overflow: hidden; color: #bbb; border-top: 1px solid; bottom: 0px; height: 31px; width: 100%; background-color: blue; padding: 5px; }
+#footer	a     { color: white; }
+#copyright    { float: left;  margin-left:   15px; }
+#logos	      { float: right; margin-right:  15px; }
+#logos img    { border: none; height: 31px; }
