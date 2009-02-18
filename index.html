@@ -2,14 +2,18 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="cache-control" content="must-revalidate" />
+
     <title>台灣海洋資訊資料庫聯盟網 Taiwan Ocean Informatioan Database</title>
     <link rel="stylesheet" type="text/css" href="index.css" />
     <link rel="stylesheet" type="text/css" href="css/theme/ui.all.css" />
+    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAREq2HXjZzIdAyVORbKBYMhTfzQKfMm5eNRoty1ZKt0XEeQdtXxTxlSH6lZOV7UEfIym3ft5_EnXXDw" type="text/javascript"></script>
     <script src="script/jquery.js"  language="javascript"></script>
     <script src="script/jquery-ui.js"  language="javascript"></script>
     <script src="script/oceandb.js" language="javascript"></script>
   </head>
-  <body>
+  <body onload="load()" onunload="GUnload()">
     <div id="header">
       <div id="main-menu"> 
 	<a href="/">HOME</a> |
