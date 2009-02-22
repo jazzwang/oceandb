@@ -10,7 +10,7 @@
     for ($i=0 ; $i < $rows ; $i++)
     {
       $col= mysql_fetch_row($result);
-      echo "{ \"type_id\" : " . $col[0] . ", \"parent_id\" : " . $col[1] . ". \"type_name\" : \"" . $col[2] . "\" , \"owner_org\" : \"" . $col[3] . "\" },\n";
+      echo "{ \"type_id\" : " . $col[0] . ", \"parent_id\" : " . $col[1] . ", \"type_name\" : \"" . $col[2] . "\", \"owner_org\" : \"" . $col[3] . "\"},\n";
     }
     echo "]";
   }

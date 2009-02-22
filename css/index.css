@@ -4,8 +4,8 @@ a	      { text-decoration: none !important; }
 /* header */
 #header	      { overflow: hidden; color: #FFE080; border-bottom: 1px solid; height: 24px; width: 100%; background-color: #03004D; padding: 5px; }
 #header a     { color: #FFC200; }
-#main-menu    { float: left;  margin-left:  5px; height: 100%; vertical-align: middle; }
-#title	      { float: right; margin-right: 5px; font-size: 18px; }
+#main-menu    { float: left;  margin-left:   5px; height: 100%; vertical-align: middle; }
+#title	      { float: right; margin-right: 15px; font-size: 18px; }
 
 /* main */
 #main	      { overflow: hidden; color: #03004D; height: 80%; width: 100%; background-color: gray; padding: 0px; }
@@ -17,6 +17,6 @@ a	      { text-decoration: none !important; }
 /* footer */
 #footer	      { overflow: hidden; color: #FFE080; border-top: 1px solid; bottom: 0px; height: 24px; width: 100%; background-color: #03004D; padding: 5px; }
 #footer	a     { color: #FFC200; }
-#copyright    { float: left;  margin-left:  5px; height: 100%; vertical-align: middle; }
-#logos	      { float: right; margin-right: 5px; }
+#copyright    { float: left;  margin-left:   5px; height: 100%; vertical-align: middle; }
+#logos	      { float: right; margin-right: 15px; }
 #logos img    { border: none; height: 28px; }
