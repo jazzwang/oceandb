@@ -1,3 +1,5 @@
+var map;  // Google Map2 物件
+
 // 註冊 onReady Event
 // 參考: http://docs.jquery.com/Events
 $(document).ready(function() {
@@ -17,6 +19,7 @@ $(document).ready(function() {
     // 註: 因為 JSON 內容按 type_id 排序，
     //	   故用 type_id 來判斷第一次出現的 type_id 產生新的 DOM
     var type_id = -1;
+    var count = 1;
     $.each(json, function(i, item){
       // 確認 type_id 是否存在，否則產生一個新的 DOM
       if(item.type_id != type_id )
@@ -26,6 +29,8 @@ $(document).ready(function() {
 			      + "</h3><div><ul id='map-menu-" + item.type_id 
 			      + "'></ul><br/></div></div>");
 	type_id = item.type_id;
+	// 當產生新的 DOM 時，把計數回歸到 1 產生 map-menu-type_id-count 的 id
+	count = 1;    
 	$("#map-menu-" + item.type_id).append("<li><input type='checkbox'>"
 		       + "<font color='red'><b>=== 以下全選 ===</b></font>"
 		       + "</input></li>");
@@ -37,10 +42,34 @@ $(document).ready(function() {
 	});
       }
       // 根據 type_id 逐一加入 owner_org
-      $("#map-menu-" + item.type_id).append("<li><input type='checkbox'>"
+      $("#map-menu-" + item.type_id).append("<li><input type='checkbox' id='map-menu-" 
+		     + item.type_id + "-" + count +"'>"
 		     + item.owner_org + "</input></li>");
 
-      // TODO: 定義 checkbox checked 跟 unchecked 對應的處理函式
+      // 定義 checkbox checked 跟 unchecked 對應的處理函式
+      $("#map-menu-" + item.type_id + "-" + count).click(function(){
+	var checked;
+	if(this.checked){ checked=true; } else { checked=false; }
+	$.ajax({
+	  type: "GET",
+	  url:  "data/get_data.php",
+	  data: "type_id=" + item.type_id + "&owner_org=" + item.owner_org ,
+	  success: function(data){
+	    //alert(data);
+	    var json = eval(data);
+	    $.each(json,function(i,item){
+	      if(checked) {
+		map.addOverlay(new GMarker(new GLatLng(item.loc1_lat, item.loc1_lon)));
+	      } else {
+		map.clearOverlays();
+	      }
+	    });
+	  }
+	});
+      });
+
+      // 把計數加 1
+      count = count + 1;
     });
 
     // 設定左側選單的 Accordion 風格
@@ -81,7 +110,7 @@ $(window).resize(function() {
 function load() 
 {
   if (GBrowserIsCompatible()) {
-    var map = new GMap2(document.getElementById("map"));  // 取得 DOM 中,名稱為 map 的元件
+    map = new GMap2(document.getElementById("map"));  // 取得 DOM 中,名稱為 map 的元件
     map.addControl(new GLargeMapControl());               // 加入左上角比例尺規控制列
     map.addControl(new GScaleControl());                  // 加入左下角比例尺狀態列
     map.addControl(new GMapTypeControl());                // 加入右上角"地圖","衛星","混合地圖"按鈕
