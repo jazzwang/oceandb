@@ -42,8 +42,8 @@ $(document).ready(function() {
 	});
       }
       // 根據 type_id 逐一加入 owner_org
-      $("#map-menu-" + item.type_id).append("<li><input type='checkbox' id='map-menu-" 
-		     + item.type_id + "-" + count +"'>"
+      $("#map-menu-" + item.type_id).append("<li><input type='checkbox' "
+		     + "id='map-menu-" + item.type_id + "-" + count +"'>"
 		     + item.owner_org + "</input></li>");
 
       // 定義 checkbox checked 跟 unchecked 對應的處理函式
@@ -59,9 +59,18 @@ $(document).ready(function() {
 	    var json = eval(data);
 	    $.each(json,function(i,item){
 	      if(checked) {
-		map.addOverlay(new GMarker(new GLatLng(item.loc1_lat, item.loc1_lon)));
+		var latlon = new GLatLng(item.loc1_lat, item.loc1_lon);
+		var marker = new GMarker(latlon);
+		GEvent.addListener(marker, 'click', function() {
+		  map.openInfoWindowHtml(latlon, "參考連結：<a href='" 
+		  + item.website + "' target='_NEW'>" + item.website + "</a>"
+		  + "<iframe width='640' height='300' src='" 
+		  + item.website + "'/>");
+		});
+		map.addOverlay(marker);
 	      } else {
 		map.clearOverlays();
+		map.closeInfoWindow();
 	      }
 	    });
 	  }
