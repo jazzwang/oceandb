@@ -62,8 +62,9 @@ $(document).ready(function() {
 		var latlon = new GLatLng(item.loc1_lat, item.loc1_lon);
 		var marker = new GMarker(latlon);
 		GEvent.addListener(marker, 'click', function() {
-		  map.openInfoWindowHtml(latlon, "參考連結：<a href='" 
-		  + item.website + "' target='_NEW'>" + item.website + "</a>"
+		  map.openInfoWindowHtml(latlon, "描述：" + item.description
+		  + "<br/>連結：<a href='" + item.website 
+		  + "' target='_NEW'>" + item.website + "</a>"
 		  + "<iframe width='640' height='300' src='" 
 		  + item.website + "'/>");
 		});
