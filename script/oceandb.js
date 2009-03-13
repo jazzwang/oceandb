@@ -25,13 +25,14 @@ $(document).ready(function() {
       // 確認 type_id 是否存在，否則產生一個新的 DOM
       if(item.type_id != type_id )
       {      
-	$('#map-menu').append("<div><h3><a href='#'>" + item.type_name  
+	$('#map-menu').append("<h3><a href='#'>" + item.type_name  
 			      + " (" + PARENT_ID[item.parent_id] + ")</a>"
 			      + "</h3><div><ul id='map-menu-" + item.type_id 
-			      + "'></ul><br/></div></div>");
+			      + "'></ul></div>");
 	type_id = item.type_id;
 	// 當產生新的 DOM 時，把計數回歸到 1 產生 map-menu-type_id-count 的 id
-	count = 1;    
+	count = 1;   
+	/* TODO: 加入全選處理函式
 	$("#map-menu-" + item.type_id).append("<li><input type='checkbox'>"
 		       + "<font color='red'><b>=== 以下全選 ===</b></font>"
 		       + "</input></li>");
@@ -41,6 +42,7 @@ $(document).ready(function() {
 	  this.checked ? alert("map-menu-" + item.type_id + " is clicked!") : 
 			 alert("map-menu-" + item.type_id + " is unclicked!");
 	});
+	*/
       }
       // 根據 type_id 逐一加入 owner_org
       $("#map-menu-" + item.type_id).append("<li><input type='checkbox' "
@@ -86,7 +88,11 @@ $(document).ready(function() {
     // 設定左側選單的 Accordion 風格
     // 註: 這行的擺放位置很重要，放在迴圈外會造成 CSS 樣式(class)的問題
     // 主因: getJSON 是非同步處理，得把動態產生 DOM 的相關設定擺在 callback 中
-    $('#map-menu').accordion({ header: "h3" });
+    $('#map-menu').accordion({
+	    header: "h3",
+	    autoHeight: false,
+	    collapsible: true
+    });
 
     // 完成從 JSON 讀入資料，因此把 loading 提示移除。
     $('#loading').remove();

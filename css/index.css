@@ -11,6 +11,7 @@ a	      { text-decoration: none !important; }
 #main	      { overflow: hidden; color: #03004D; height: 80%; width: 100%; background-color: gray; padding: 0px; }
 #map-menu     { background-color: #E6E6FF; width: 20%; height: 100%; float: left; display: block; font-size: 12px;}
 #map-menu h3  { color: #03004D; font-size: 12px; }
+#map-menu ul  { background-color: #E6E6FF; }
 #loading      { color: #ff0000; font-szie: 14px; width: 100%; text-align: center; margin-top: 50px; }
 #map	      { background-color: #03004D; width: 80%; height: 100%; float: right; }
 
