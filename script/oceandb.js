@@ -1,4 +1,5 @@
 var map;  // Google Map2 物件
+var ge;   // Google Earth Plugin 物件
 var icon;
 
 // 註冊 onReady Event
@@ -135,6 +136,8 @@ function load()
     map.addControl(new GScaleControl());
     // 加入右上角"地圖","衛星","混合地圖"按鈕
     map.addControl(new GMapTypeControl());
+    // 加入右上角 Google Earth 的"地球"按鈕
+    map.addMapType(G_SATELLITE_3D_MAP);
     // 設定預設經緯度北緯 23.8, 東經 121, 預設比例尺 100 公里(7)
     map.setCenter(new GLatLng(23.8,121), 7);
     // 設定預設底圖為"衛星"
