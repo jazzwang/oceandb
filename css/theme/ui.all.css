@@ -167,7 +167,6 @@
 	top: -1px;
 	z-index: 1;
 	opacity:.7;
-	filter:Alpha(Opacity=70);
 }
 
 
@@ -448,7 +447,6 @@ table.ui-datepicker .ui-datepicker-title-row td a {
 	display/**/: block;
 	position: absolute;
 	z-index: -1;
-	filter: mask();
 	top: -4px;
 	left: -4px;
 	width: 193px;

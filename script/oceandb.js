@@ -1,13 +1,15 @@
 var map;  // Google Map2 物件
 var ge;   // Google Earth Plugin 物件
 var icon;
+var tm;   // Google Map2 Timeline
 
 // 註冊 onReady Event
 // 參考: http://docs.jquery.com/Events
 $(document).ready(function() {
 
   // 呼叫 Google Map API 載入地圖
-  load();
+  onLoad();
+  GUnload();
 
   var PARENT_ID = [];	  // 產生一個空的陣列
   PARENT_ID[1] = "定點";
@@ -101,6 +103,7 @@ $(document).ready(function() {
 
   // 設定地圖高度
   var map_height=document.documentElement.clientHeight - 68;
+  $('#mapcontainer').css( { height: map_height } );
   $('#main').css( { height: map_height } );
 
   // 設定點選 "MENU" 的行為
@@ -122,33 +125,121 @@ $(document).ready(function() {
 $(window).resize(function() {
   // 當改變瀏覽器大小時，重新設定地圖高度
   var map_height=document.documentElement.clientHeight - 68;
+  $('#mapcontainer').css( { height: map_height } );
   $('#main').css( { height: map_height } );
-});
+});          
+             
+function onLoad() {
 
-function load() 
-{
-  if (GBrowserIsCompatible()) {
-    // 取得 DOM 中,名稱為 map 的元件
-    map = new GMap2(document.getElementById("map"));  
-    // 加入左上角比例尺規控制列
-    map.addControl(new GLargeMapControl());               
-    // 加入左下角比例尺狀態列
-    map.addControl(new GScaleControl());
-    // 加入右上角"地圖","衛星","混合地圖"按鈕
-    map.addControl(new GMapTypeControl());
-    // 加入右上角 Google Earth 的"地球"按鈕
-    map.addMapType(G_SATELLITE_3D_MAP);
-    // 設定預設經緯度北緯 23.8, 東經 121, 預設比例尺 100 公里(7)
-    map.setCenter(new GLatLng(23.8,121), 7);
-    // 設定預設底圖為"衛星"
-    map.setMapType(G_SATELLITE_MAP);
-    // 產生預設 icon 圖示
-    icon = new GIcon();
-    icon.image  = "image/icon.png";
-    icon.shadow = "image/icon.png";
-    icon.iconSize = new GSize(12, 12);
-    icon.shadowSize = new GSize(12, 12);
-    icon.iconAnchor = new GPoint(12, 12);
-    icon.infoWindowAnchor = new GPoint(12, 12);
-  }
+        tm = TimeMap.init({
+	mapId: "map",               // Id of map div element (required)
+	timelineId: "timeline",     // Id of timeline div element (required) 
+	datasets: [
+	    {
+                id: "artists",
+		title: "Artists",
+		theme: TimeMapDataset.orangeTheme({eventIconPath: "./image"}),
+		// note that the lines below are now the preferred syntax
+		type: "basic",
+		options: {
+		    items: [
+			{
+			  "start" : "1981",
+                          "end" : "2009-01-11",
+			  "point" : {
+			      "lat" : 23.8123,
+		              "lon" : 121.123
+			   },
+			  "title" : "中央氣象局",
+			  "options" : {
+			    // set the full HTML for the info window
+			    "infoHtml": "<div class='custominfostyle'><b>中央氣象局.</div>"
+			  }
+			},
+			{
+			  "start" : "1991",
+			  "end" : "2010",
+			  "point" : {
+			      "lat" : 22.5234,
+			      "lon" : 120.534
+			   },
+			 "title" : "海洋科技研究中心",
+			 "options" : { 
+			   // load HTML from another file via AJAX
+			   // Note that this may break in IE if you're running it with
+			   // a local file, due to cross-site scripting restrictions
+			   "infoUrl": "http://www.nchc.org.tw",
+			   "theme": TimeMapDataset.redTheme({eventIconPath: "./image"})
+			  }
+		        },  
+                        {
+			 "start" : "2001",
+			 "end" : "2020",
+			 "point" : {
+			     "lat" : 24.8345,
+			     "lon" : 122.845
+			  },
+			 "title" : "經濟部水利署",
+			 "options" : {
+			   // use the default title/description info window
+			   "description": "Renaissance Man",
+			   "theme": TimeMapDataset.yellowTheme({eventIconPath: "image/"})
+			  }
+			}
+                      ]
+		    }
+		}   
+	    ],
+	    bandIntervals: [      
+		Timeline.DateTime.DECADE, 
+		Timeline.DateTime.CENTURY
+	    ]  
+	});
+        // manipulate the timemap further here if you like
+	
+      if (GBrowserIsCompatible()) {
+
+	// 宣告 TimelineMap 的 MapID 對應到原本的 map
+	map = tm.map;  
+	// 取得 DOM 中,名稱為 map 的元件
+	map = new GMap2(document.getElementById("map"));
+	// 加入左上角比例尺規控制列
+	map.addControl(new GLargeMapControl3D());
+	// 鳥瞰圖
+	map.addControl(new GOverviewMapControl());
+	// Mouse Zoom In/Out
+	map.enableScrollWheelZoom();
+	// 加入左下角比例尺狀態列
+	map.addControl(new GScaleControl());
+	// 加入右上角"地圖","衛星","混合地圖"按鈕
+	map.addControl(new GMapTypeControl());
+	// Google Earth
+	map.addMapType(G_SATELLITE_3D_MAP);
+	// GZoom Control
+	map.addControl(new GZoomControl(
+		    {
+			    sButtonHTML:"<img src='image/zooming.gif' />",
+			    sButtonZoomingHTML:"<img src='image/zoom.jpg' />",
+			    oButtonStartingStyle:{width:'24px',height:'24px'},
+			    sColor:'#000',
+			    nOpacity:.2,
+			    sBorder:"2px solid red",
+			    nOverlayRemoveMS:'10000',
+			    bForceCheckResize:'true'
+		    }
+	),new GControlPosition(G_ANCHOR_BOTTOM_LEFT,new GSize(3,3)));
+	// 設定預設經緯度北緯 23.8, 東經 121, 預設比例尺 100 公里(7)
+	map.setCenter(new GLatLng(23.8,121), 7);
+	// 設定預設底圖為"衛星"
+	map.setMapType(G_SATELLITE_MAP);
+	// 產生預設 icon 圖示 
+	icon = new GIcon();   
+	icon.image  = "image/icon.png";
+	icon.shadow = "image/icon.png";
+	icon.iconSize = new GSize(12, 12);
+	icon.shadowSize = new GSize(12, 12);
+	icon.iconAnchor = new GPoint(12, 12);
+	icon.infoWindowAnchor = new GPoint(12, 12);
+      }
 }
+
