@@ -215,19 +215,20 @@ function onLoad() {
 	map.addControl(new GMapTypeControl());
 	// Google Earth
 	map.addMapType(G_SATELLITE_3D_MAP);
-	// GZoom Control
-	map.addControl(new GZoomControl(
-		    {
-			    sButtonHTML:"<img src='image/zooming.gif' />",
-			    sButtonZoomingHTML:"<img src='image/zoom.jpg' />",
-			    oButtonStartingStyle:{width:'24px',height:'24px'},
-			    sColor:'#000',
-			    nOpacity:.2,
-			    sBorder:"2px solid red",
-			    nOverlayRemoveMS:'10000',
-			    bForceCheckResize:'true'
-		    }
-	),new GControlPosition(G_ANCHOR_BOTTOM_LEFT,new GSize(3,3)));
+	// DragZoom Properties
+	var otherOpts = { 
+	  buttonStartingStyle: {background: '#FFF', paddingTop: '4px', paddingLeft: '4px', border:'1px solid black'},
+	  buttonHTML: "<img title='Drag Zoom In' src='image/zoomin.gif'>",
+	  buttonStyle: {width:'25px', height:'25px'},
+	  buttonZoomingHTML: '請選取範圍',
+	  buttonZoomingStyle: {background:'yellow',width:'85px', height:'100%'},
+	  backButtonHTML: "<img title='Zoom Back Out' src='image/zoomout.gif'>",
+	  backButtonStyle: {display:'none',marginTop:'5px',width:'25px', height:'25px'},
+	  backButtonEnabled: true, 
+          overlayRemoveTime: 1500
+	}
+	// DragZoom Control
+	map.addControl(new DragZoomControl({}, otherOpts, {}),new GControlPosition(G_ANCHOR_BOTTOM_LEFT,new GSize(20,60)));
 	// 設定預設經緯度北緯 23.8, 東經 121, 預設比例尺 100 公里(7)
 	map.setCenter(new GLatLng(23.8,121), 7);
 	// 設定預設底圖為"衛星"
