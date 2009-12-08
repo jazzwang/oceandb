@@ -1,6 +1,6 @@
 var map;  // Google Map2 物件
 var ge;   // Google Earth Plugin 物件
-var icon;
+var icon; // Google Map2 icon creator
 var tm;   // Google Map2 Timeline
 
 // 註冊 onReady Event
@@ -103,6 +103,7 @@ $(document).ready(function() {
 
   // 設定地圖高度
   var map_height=document.documentElement.clientHeight - 68;
+
   $('#mapcontainer').css( { height: map_height } );
   $('#main').css( { height: map_height } );
 
@@ -122,7 +123,7 @@ $(document).ready(function() {
 
 // 註冊 window 物件的 onResize Event
 // 參考: http://docs.jquery.com/Events
-$(window).resize(function() {
+  $(window).resize(function() {
   // 當改變瀏覽器大小時，重新設定地圖高度
   var map_height=document.documentElement.clientHeight - 68;
   $('#mapcontainer').css( { height: map_height } );
@@ -134,68 +135,61 @@ function onLoad() {
         tm = TimeMap.init({
 	mapId: "map",               // Id of map div element (required)
 	timelineId: "timeline",     // Id of timeline div element (required) 
-	datasets: [
+	datasets: [                 
 	    {
-                id: "artists",
-		title: "Artists",
-		theme: TimeMapDataset.orangeTheme({eventIconPath: "./image"}),
-		// note that the lines below are now the preferred syntax
-		type: "basic",
+		title: "海研三號 OR3-1412",
+		theme: "red",
+		type: "kml",        // KML
 		options: {
-		    items: [
-			{
-			  "start" : "1981",
-                          "end" : "2009-01-11",
-			  "point" : {
-			      "lat" : 23.8123,
-		              "lon" : 121.123
-			   },
-			  "title" : "中央氣象局",
-			  "options" : {
-			    // set the full HTML for the info window
-			    "infoHtml": "<div class='custominfostyle'><b>中央氣象局.</div>"
-			  }
-			},
-			{
-			  "start" : "1991",
-			  "end" : "2010",
-			  "point" : {
-			      "lat" : 22.5234,
-			      "lon" : 120.534
-			   },
-			 "title" : "海洋科技研究中心",
-			 "options" : { 
-			   // load HTML from another file via AJAX
-			   // Note that this may break in IE if you're running it with
-			   // a local file, due to cross-site scripting restrictions
-			   "infoUrl": "http://www.nchc.org.tw",
-			   "theme": TimeMapDataset.redTheme({eventIconPath: "./image"})
-			  }
-		        },  
-                        {
-			 "start" : "2001",
-			 "end" : "2020",
-			 "point" : {
-			     "lat" : 24.8345,
-			     "lon" : 122.845
-			  },
-			 "title" : "經濟部水利署",
-			 "options" : {
-			   // use the default title/description info window
-			   "description": "Renaissance Man",
-			   "theme": TimeMapDataset.yellowTheme({eventIconPath: "image/"})
-			  }
-			}
-                      ]
+		url: "data/kml/OR3-1412.kml" // Load KML file
+	        }
+	    }
+	    /*
+	    {
+		title: "海研三號 OR3-1412",
+		theme: "green",
+		type: "progressive",
+		options: {
+		    // Data to be loaded in JSON from a remote URL
+		    type: "json",  // JSON
+		    // url with start/end placeholders
+		    // url: "http://s2home.nchc.org.tw/oid/data/test.json",
+		    // TestCase
+		    // url: "http://www.nickrabinowitz.com/projects/timemap/progsvc.php?start=[start]&end=[end]&callback=",
+		    start: "1989-01-01",
+		    // lower cutoff date for data
+		    dataMinDate: "2009-12-31",
+		    // four months in milliseconds
+		    interval: 10368000000,
+		    // function to turn date into string appropriate for service
+		    formatDate: function(d) {
+			return TimeMap.util.formatDate(d, 1);
 		    }
-		}   
-	    ],
-	    bandIntervals: [      
+		}
+	    }
+	    */
+        ],
+	bandInfo: [ //上軸時間間隔與大小設定    
+	    {
+	       width:          "70%", 
+	       intervalUnit:   Timeline.DateTime.MONTH, 
+	       intervalPixels: 210
+	    },
+	    {       //下軸時間間隔與大小設定
+	       width:          "30%", 													    intervalUnit:   Timeline.DateTime.YEAR, 
+	       intervalPixels: 150,
+	       showEventText:  false,
+	       trackHeight:    0.2,
+	       trackGap:       0.2
+	    }
+	],
+	/*
+	bandIntervals: [      
 		Timeline.DateTime.DECADE, 
 		Timeline.DateTime.CENTURY
-	    ]  
-	});
-        // manipulate the timemap further here if you like
+	
+        ] */  
+    });
 	
       if (GBrowserIsCompatible()) {
 
