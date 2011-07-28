@@ -193,10 +193,10 @@ function onLoad() {
 	
       if (GBrowserIsCompatible()) {
 
-	// 宣告 TimelineMap 的 MapID 對應到原本的 map
-	map = tm.map;  
 	// 取得 DOM 中,名稱為 map 的元件
 	map = new GMap2(document.getElementById("map"));
+	// 宣告 TimelineMap 的 MapID 對應到原本的 map
+	tm.map = map;  
 	// 加入左上角比例尺規控制列
 	map.addControl(new GLargeMapControl3D());
 	// 鳥瞰圖
